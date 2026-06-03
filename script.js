@@ -1,47 +1,47 @@
-const display = document.querySelector('display');
+const display = document.querySelector('.display');
 const buttons = document.querySelectorAll('.button');
 
-let currentExpression = Number(z.innerHTML);
-
-function updateDisplay() {
-    display.textContent = currentExpression;
-}
+let currentExpression = Number(display.innerHTML);
 
 function handleButton(button) {
     const value = button.target.textContent;
     if (value === '=') {
-        if (z.innerHTML.includes('%'))  {
-            const proc = z.innerHTML.split('%')
+        if (display.innerHTML.includes('%'))  {
+            const proc = display.innerHTML.split('%')
             currentExpression = eval(proc[0] * proc[1] / 100)
-            z.innerHTML = currentExpression
+            display.innerHTML = currentExpression
         } else if (currentExpression === '0÷0') {
             currentExpression = ''
-            z.innerHTML = 'Нельзя'
+            display.innerHTML = 'На ноль делить нельзя'
         } else {
-            let res = eval(z.innerHTML.replaceAll("×", "*").replaceAll("÷", "/").replaceAll("−", "-"))
+            let res = eval(display.innerHTML.replaceAll("×", "*").replaceAll("÷", "/").replaceAll("−", "-"))
             console.log(res);
-            z.innerHTML = res
+            display.innerHTML = res
             currentExpression = res
         }
 
     } else if (value === "%") {
-        currentExpression = eval(z.innerHTML) + "%"
-        z.innerHTML = currentExpression
+        currentExpression = eval(display.innerHTML) + "%"
+        display.innerHTML = currentExpression
     }
-    else if (value === "." && z.innerHTML.at(-1) === ".") {
+    else if (value === "." && display.innerHTML.at(-1) === ".") {
         return
      
     } else if (value === 'AC') {
         console.log('Очищено');
         currentExpression = ''
-        z.innerHTML = '0'
+        display.innerHTML = '0'
     } else {
         currentExpression += value
         console.log(currentExpression);
-        z.innerHTML = currentExpression
+        display.innerHTML = currentExpression
     }
 };
 
 buttons.forEach(button => {
     button.addEventListener('click', handleButton);
 });
+
+function updateDisplay() {
+    display.textContent = currentExpression;
+}
