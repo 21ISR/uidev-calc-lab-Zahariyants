@@ -10,11 +10,11 @@ function handleButton(button) {
             const proc = display.innerHTML.split('%')
             currentExpression = eval(proc[0] * proc[1] / 100)
             display.innerHTML = currentExpression
-        } else if (currentExpression === '0÷0') {
+        } else if (currentExpression === '0 ÷ 0') {
             currentExpression = ''
             display.innerHTML = 'На ноль делить нельзя'
         } else {
-            let res = eval(display.innerHTML.replaceAll("×", "*").replaceAll("÷", "/").replaceAll("−", "-"))
+            let res = eval(display.innerHTML.replaceAll("−", "-").replaceAll("×", "*").replaceAll("÷", "/"))
             console.log(res);
             display.innerHTML = res
             currentExpression = res
